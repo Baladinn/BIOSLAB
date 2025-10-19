@@ -1,0 +1,54 @@
+{% extends 'stock/base.html' %}
+{% block title %}Bon de livraison {{ dn.numero }}{% endblock %}
+{% block content %}
+<h2>Bon de livraison: {{ dn.numero }}</h2>
+<p><strong>Date:</strong> {{ dn.date|date:"Y-m-d H:i" }}</p>
+<p><strong>Commande:</strong> {{ order.reference }}</p>
+<hr>
+    <h3>Informations client</h3>
+    <p><strong>Nom :</strong> {{ order.client.nom }}</p>
+    <p><strong>Email :</strong> {{ order.client.email }}</p>
+    <p><strong>Téléphone :</strong> {{ order.client.telephone }}</p>
+    <p><strong>Adresse :</strong> {{ order.client.adresse }}</p>
+<hr>
+<h3>Produits commandés</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Sous Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>      
+                <td>{{ item.product.nom }}</td>
+                <td>{{ item.prix_unitaire }} MAD</td>
+                <td>{{ item.quantite }}</td>
+                <td>{{ item.subtotal }} MAD</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Aucun produit dans cette commande.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <div class="total-section">
+        <tr>
+       <td> <strong>Total HT:</strong> {{ order.total }} MAD </td>
+       </tr>
+    </div>
+    <div class="total-section">
+       <tr>
+       <td> <strong>Total TTC:</strong> {{price_ttc|floatformat:2 }} MAD </td>
+        </tr>
+    </div>
+    <hr>
+<div class="no-print">
+  <button onclick="window.print()">Imprimer / Enregistrer en PDF</button>
+</div>
+{% endblock %}

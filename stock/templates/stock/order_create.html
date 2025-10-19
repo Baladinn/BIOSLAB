@@ -1,0 +1,23 @@
+{% extends 'stock/base.html' %}
+{% block content %}
+<h2>Nouvelle commande</h2>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <h3>Articles</h3>
+  {{ formset.management_form }}
+  <table>
+    <thead><tr><th>Produit</th><th>Quantité</th><th>Prix unitaire</th><th>Suppr</th></tr></thead>
+    <tbody>
+      {% for form in formset.forms %}
+        <tr>
+          <td>{{ form.product}}</td>
+          <td>{{ form.quantite }}</td>
+          <td>{{ form.prix_unitaire }}</td>
+          <td>{% if form.instance.pk %}{{ form.DELETE }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Créer commande</button>
+</form>
+{% endblock %}

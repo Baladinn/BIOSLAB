@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}BIOSLAB{% endblock %}</title>
+  <style>
+    body{font-family: Arial, sans-serif; margin:20px;}
+    table{width:100%; border-collapse: collapse;}
+    th,td{padding:8px; border:1px solid #ddd;}
+    .right{text-align:right;}
+    .center{text-align:center;}
+    .print-only{display:none;}
+    @media print { .no-print{display:none;} .print-only{display:block;} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>{% block heading %}BIOSLAB{% endblock %}</h1>
+    <nav class="no-print">
+      <a href="{% url 'stock:product_list' %}">Produits</a> |
+      <a href="{% url 'stock:client_create' %}">Nouveau client</a> |
+      <a href="{% url 'stock:order_create' %}">Nouvelle commande</a>
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'stock/base.html' %}
+{% block title %}Facture {{ invoice.numero }}{% endblock %}
+{% block content %}
+<div>
+  <h2>Facture: {{ invoice.numero }}</h2>
+  <p><strong>Date:</strong> {{ invoice.date|date:"Y-m-d H:i" }}</p>
+  <p><strong>Client:</strong> {{ order.client.nom }}</p>
+  <p><strong>Référence commande:</strong> {{ order.reference }}</p>
+
+  <table>
+    <thead><tr><th>Produit</th><th>Qte</th><th>PU</th><th>Sous-total</th></tr></thead>
+    <tbody>
+      {% for item in order.items.all %}
+      <tr>
+        <td>{{ item.product.nom }}</td>
+        <td class="center">{{ item.quantite }}</td>
+        <td class="right">{{ item.prix_unitaire }}</td>
+        <td class="right">{{ item.subtotal }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3" class="right"><strong>Total HT</strong></td>
+        <td class="right"><strong>{{ invoice.total }}</strong></td>
+        </tr>
+        <tr>
+        <td colspan="3" class="right"><strong>Total TTC</strong></td>
+        <td class="right"><strong>{{ price_ttc|floatformat:2 }}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="no-print">
+    <button onclick="window.print()">Imprimer / Enregistrer en PDF</button>
+  </div>
+</div>
+{% endblock %}
