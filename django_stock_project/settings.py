@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xt2&70%zu(my=91if#63=nm&rehc4x=f_4^v$lgb0+x$b+wj+w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ismagipython-gmgrayatfcdhczay.francecentral-01.azurewebsites.net']
 
 
 # Application definition
